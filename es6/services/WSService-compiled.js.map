@@ -1,0 +1,1 @@
+{"version":3,"sources":["WSService.js"],"names":[],"mappings":"AAAA;;;;AAIA,SAAQ,SAAR,QAAwB,iBAAxB;;AAEA,QAAQ,GAAR,CAAY,SAAZ;;AAEA,OAAO,MAAM,IAAN,CAAW","file":"WSService-compiled.js","sourcesContent":["/**\n * Created by anthrax on 10/4/16.\n */\n\nimport {WSService} from './es6/WSService'\n\nconsole.log(WSService);\n\nexport class test {\n\n\n    \n}"]}
