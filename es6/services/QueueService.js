@@ -2,24 +2,29 @@ export default class QueueService {
 
   constructor(){
     this._queue = {};
+    this._lock = false;
   }
 
-  // todo: refactor expireTime marking
-  add(message, now){
+  add(message){
+    if(this._lock) {return false};
     if(!this._queue[message.name]) {
-      now.setTime(now.getTime() + 10000);
-      message.midPriceExpire = now;
       message.midPrice = [(message.bestBid + message.bestAsk) / 2];
     } else {
-      message.midPriceExpire = this._queue[message.name].midPriceExpire;
       message.midPrice = this._queue[message.name].midPrice.concat([(message.bestBid + message.bestAsk) / 2]);
     }
-    let currDateTime = new Date();
-    if (message.midPriceExpire.getTime() < currDateTime.getTime()){
-      message.midPriceExpire = currDateTime;
-      message.midPrice = [(message.bestBid + message.bestAsk) / 2];
-    }
     this._queue[message.name] = message;
+  }
+
+  /**
+   * Set's the last priceMid value as first of new period
+   */
+  discartMidPrices(){
+    this._lock = true;
+    for (var key in this._queue) {
+      let last = this._queue[key].midPrice.length -1;
+      this._queue[key].midPrice = [this._queue[key].midPrice[last]];
+    }
+    this._lock = false;
   }
 
   getData(){

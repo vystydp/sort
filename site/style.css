@@ -43,3 +43,8 @@ th {
 td:nth-child(1) {
     text-align: center
 }
+
+footer {
+    padding: 20px;
+    text-align: center;
+}
