@@ -10,6 +10,11 @@ export default class QueueService {
   }
 
   add(message){
+    if(!this._queue[message.name]) {
+      message.midPrice = [(message.bestBid + message.bestAsk) / 2];
+    } else {
+      message.midPrice = this._queue[message.name].midPrice.concat([(message.bestBid + message.bestAsk) / 2]);
+    }
     this._queue[message.name] = message;
   }
 
