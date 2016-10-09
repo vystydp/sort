@@ -1,19 +1,23 @@
-/**
- * Created by anthrax on 10/8/16.
- */
-
-
 export default class QueueService {
 
   constructor(){
     this._queue = {};
   }
 
-  add(message){
+  // todo: refactor expireTime marking
+  add(message, now){
     if(!this._queue[message.name]) {
+      now.setTime(now.getTime() + 10000);
+      message.midPriceExpire = now;
       message.midPrice = [(message.bestBid + message.bestAsk) / 2];
     } else {
+      message.midPriceExpire = this._queue[message.name].midPriceExpire;
       message.midPrice = this._queue[message.name].midPrice.concat([(message.bestBid + message.bestAsk) / 2]);
+    }
+    let currDateTime = new Date();
+    if (message.midPriceExpire.getTime() < currDateTime.getTime()){
+      message.midPriceExpire = currDateTime;
+      message.midPrice = [(message.bestBid + message.bestAsk) / 2];
     }
     this._queue[message.name] = message;
   }

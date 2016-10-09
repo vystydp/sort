@@ -14,7 +14,8 @@ require('./es6/index');
 // here to load the myEs6code.js file, and it will be automatically transpiled.
 
 // Change this to get detailed logging from the stomp library
-global.DEBUG = false;
+// global.DEBUG = false
+
 
 //const exampleSparkline = document.getElementById('example-sparkline')
 //Sparkline.draw(exampleSparkline, [1, 2, 3, 6, 8, 20, 2, 2, 4, 2, 3])

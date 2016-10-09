@@ -1,7 +1,3 @@
-/**
- * Created by anthrax on 10/4/16.
- */
-
 export default class WSService {
 
   constructor(url) {
